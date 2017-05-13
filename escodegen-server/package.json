@@ -1,0 +1,14 @@
+{
+  "name": "escodegen-server",
+  "version": "0.0.1",
+  "description": "esprima/escodegen as a service",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TerrorJack/escodegen.git"
+  },
+  "dependencies": {
+    "esprima": "^2.7.1",
+    "escodegen": "^1.8.1"
+  }
+}

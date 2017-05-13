@@ -1,0 +1,33 @@
+language: generic
+
+git:
+  depth: 1
+
+cache:
+  directories:
+    - $HOME/.stack/
+    - $TRAVIS_BUILD_DIR/.stack-work/
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: false
+      addons:
+        apt:
+          sources:
+            - hvr-ghc
+            - ubuntu-toolchain-r-test
+          packages:
+            - ghc-8.0.2
+
+before_install:
+  - mkdir -p ~/.local/bin
+  - export PATH=~/.local/bin:/opt/ghc/8.0.2/bin:$PATH
+  - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - stack --no-terminal build --only-dependencies
+
+install: true
+
+script:
+  - stack --no-terminal install --haddock --no-haddock-deps
